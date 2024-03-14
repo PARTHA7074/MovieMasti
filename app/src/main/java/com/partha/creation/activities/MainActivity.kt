@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.partha.creation.R
 import com.partha.creation.databinding.ActivityMainBinding
 import com.partha.creation.retrofit.MyViewModel
@@ -16,6 +19,7 @@ import com.partha.creation.retrofit.MyViewModel
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: MyViewModel by viewModels()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +28,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+        navController = findNavController(R.id.navHostFragment)
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         // Observe the movie response
         viewModel.movieResponse.observe(this) { movieResponse ->
@@ -34,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             // Example: binding.textView.text = movieResponse.someValue
             // Clear any error message if movieResponse is received successfully
             // Example: binding.errorTextView.visibility = View.GONE
-            Log.d("onResponse: ", movieResponse.toString())
+            //Log.d("onResponse: ", movieResponse.toString())
 
         }
 
@@ -46,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             // Example: binding.errorTextView.text = errorMessage
             // Example: binding.errorTextView.visibility = View.VISIBLE
             Log.e("onResponse: ", errorMessage)
-            Log.d("onResponse: ", "Ended")
         }
 
         // Make API call

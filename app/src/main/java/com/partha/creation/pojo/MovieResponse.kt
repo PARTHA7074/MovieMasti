@@ -1,5 +1,7 @@
 package com.partha.creation.pojo
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
@@ -51,4 +53,51 @@ data class DataItem(
 
 	@field:SerializedName("authors")
 	val authors: List<String?>? = null
-)
+): Parcelable {
+	constructor(parcel: Parcel) : this(
+		parcel.readString(),
+		parcel.readString(),
+		parcel.readString(),
+		parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+		parcel.readValue(Int::class.java.classLoader) as? Int,
+		parcel.readString(),
+		parcel.readString(),
+		parcel.createStringArrayList(),
+		parcel.readValue(Long::class.java.classLoader) as? Long,
+		parcel.readString(),
+		parcel.readValue(Long::class.java.classLoader) as? Long,
+		parcel.readString(),
+		parcel.createStringArrayList()
+	) {
+	}
+
+	override fun writeToParcel(parcel: Parcel, flags: Int) {
+		parcel.writeString(summary)
+		parcel.writeString(subTitle)
+		parcel.writeString(thumb)
+		parcel.writeValue(nsfw)
+		parcel.writeValue(totalChapter)
+		parcel.writeString(title)
+		parcel.writeString(type)
+		parcel.writeStringList(genres)
+		parcel.writeValue(updateAt)
+		parcel.writeString(id)
+		parcel.writeValue(createAt)
+		parcel.writeString(status)
+		parcel.writeStringList(authors)
+	}
+
+	override fun describeContents(): Int {
+		return 0
+	}
+
+	companion object CREATOR : Parcelable.Creator<DataItem> {
+		override fun createFromParcel(parcel: Parcel): DataItem {
+			return DataItem(parcel)
+		}
+
+		override fun newArray(size: Int): Array<DataItem?> {
+			return arrayOfNulls(size)
+		}
+	}
+}
