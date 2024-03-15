@@ -18,6 +18,7 @@ import com.partha.creation.room.AppDatabase
 import com.partha.creation.room.RoomRepository
 import com.partha.creation.room.entities.Movie
 import com.partha.creation.utils.Constants
+import com.partha.creation.utils.NetworkManager
 
 class MovieFragment : Fragment() {
     private var _binding: FragmentMovieBinding? = null
@@ -39,13 +40,18 @@ class MovieFragment : Fragment() {
             binding.progressBar.isVisible = false
             Constants.movies = movieResponse.data
             binding.movieRecyclerView.adapter = MovieRecyclerAdapter(this, movieResponse.data)
+            if (movieResponse.data?.isNotEmpty() == true) roomRepository?.deleteAllMovies()
             roomRepository?.insertAllMovies(movieResponse.data as List<Movie>?)
         }
 
-        Constants.movies = roomRepository?.getAllMovies()
+        Constants.isInternetActive = NetworkManager().isInternetAvailable(requireContext())
+        if (!Constants.isInternetActive) {
+            Constants.movies = roomRepository?.getAllMovies()
+        }
 
-        if (Constants.movies == null || Constants.movies?.isEmpty() == true) viewModel.fetchMovies("1")
-        else {
+        if (Constants.movies == null || Constants.movies?.isEmpty() == true) {
+            viewModel.fetchMovies("1")
+        } else {
             binding.movieRecyclerView.adapter = MovieRecyclerAdapter(this, Constants.movies)
             binding.progressBar.isVisible = false
         }

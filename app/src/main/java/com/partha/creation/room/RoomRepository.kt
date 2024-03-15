@@ -18,4 +18,8 @@ class RoomRepository(private val database: AppDatabase) {
     fun updateMovieFavoriteStatus(movieId: String, isFavorite: Boolean) {
         runBlocking { database.movieDao().updateIsFavorite(movieId, isFavorite) }
     }
+
+    fun deleteAllMovies(){
+        runBlocking { database.movieDao().deleteAllMovies() }
+    }
 }

@@ -2,6 +2,7 @@ package com.partha.creation.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.partha.creation.R
 import com.partha.creation.databinding.ActivityMainBinding
 import com.partha.creation.retrofit.MyViewModel
+import com.partha.creation.utils.Constants
+import com.partha.creation.utils.NetworkManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         }
         navController = findNavController(R.id.navHostFragment)
         binding.bottomNavigationView.setupWithNavController(navController)
+        
+        Constants.isInternetActive = NetworkManager().isInternetAvailable(this)
+        if (!Constants.isInternetActive){
+            Toast.makeText(this, "Please enable internet to update latest data", Toast.LENGTH_SHORT).show()
+        }
 
         // Make API call
         viewModel.fetchMovies("1")
