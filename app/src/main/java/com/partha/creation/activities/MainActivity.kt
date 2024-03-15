@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -34,28 +35,12 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.navHostFragment)
         binding.bottomNavigationView.setupWithNavController(navController)
 
-        // Observe the movie response
-        viewModel.movieResponse.observe(this) { movieResponse ->
-            // Update UI with the movie response
-            // Example: binding.textView.text = movieResponse.someValue
-            // Clear any error message if movieResponse is received successfully
-            // Example: binding.errorTextView.visibility = View.GONE
-            //Log.d("onResponse: ", movieResponse.toString())
-
-        }
-
-        // Observe error message
-        viewModel.errorMessage.observe(this) { errorMessage ->
-            // Handle error message
-            // Example: Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-            // You can also update UI elements to display the error message
-            // Example: binding.errorTextView.text = errorMessage
-            // Example: binding.errorTextView.visibility = View.VISIBLE
-            Log.e("onResponse: ", errorMessage)
-        }
-
         // Make API call
         viewModel.fetchMovies("1")
 
+    }
+
+    fun navigationViewVisibility(isVisible: Boolean){
+        binding.bottomNavigationView.isVisible = isVisible
     }
 }

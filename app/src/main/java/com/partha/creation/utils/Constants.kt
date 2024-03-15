@@ -1,7 +1,7 @@
 package com.partha.creation.utils
 
-import com.partha.creation.pojo.DataItem
+import com.partha.creation.room.entities.Movie
 
 object Constants {
-    var data: List<DataItem?>? = null
+    var movies: List<Movie?>? = null
 }

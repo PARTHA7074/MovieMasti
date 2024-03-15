@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.MovieMasti" parent="Base.Theme.MovieMasti" />
+    <color name="movieBackground">@color/white</color>
 </resources>

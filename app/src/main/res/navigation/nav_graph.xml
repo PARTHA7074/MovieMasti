@@ -15,7 +15,7 @@
             app:destination="@id/movieDetailsFragment" >
             <argument
                 android:name="movie"
-                app:argType="com.partha.creation.pojo.DataItem"/>
+                app:argType="com.partha.creation.room.entities.Movie"/>
         </action>
     </fragment>
 
