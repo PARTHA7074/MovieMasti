@@ -41,7 +41,9 @@ class MovieFragment : Fragment() {
             binding.movieRecyclerView.adapter = MovieRecyclerAdapter(this, movieResponse.data)
             roomRepository?.insertAllMovies(movieResponse.data as List<Movie>?)
         }
+
         Constants.movies = roomRepository?.getAllMovies()
+
         if (Constants.movies == null || Constants.movies?.isEmpty() == true) viewModel.fetchMovies("1")
         else {
             binding.movieRecyclerView.adapter = MovieRecyclerAdapter(this, Constants.movies)

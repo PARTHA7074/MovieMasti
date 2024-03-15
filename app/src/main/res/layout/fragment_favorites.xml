@@ -17,6 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Currently no movie added in favorite"/>
+        android:text="@string/no_movie_added"/>
 
 </FrameLayout>

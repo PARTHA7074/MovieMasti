@@ -2,4 +2,6 @@
     <string name="app_name">Movie Masti</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_movie_added">Currently no movie added in favorite</string>
+    <string name="splash_text">Movie Masti: Your Ultimate Movie Details Destination!</string>
 </resources>

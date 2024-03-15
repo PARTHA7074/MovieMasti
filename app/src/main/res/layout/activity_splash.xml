@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp"
-        android:text="Movie Masti: Your Ultimate Movie Details Destination!"
+        android:text="@string/splash_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
