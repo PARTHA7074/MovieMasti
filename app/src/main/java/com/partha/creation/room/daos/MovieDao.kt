@@ -11,10 +11,10 @@ interface MovieDao {
     @Query("SELECT * FROM movies")
     suspend fun getAllMovies(): List<Movie?>?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovie(movie: Movie)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllMovies(movies: List<Movie>)
 
     @Query("UPDATE movies SET isFavorite = :isFavorite WHERE id = :movieId")

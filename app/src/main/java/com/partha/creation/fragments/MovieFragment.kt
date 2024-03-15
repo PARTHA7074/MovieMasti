@@ -40,7 +40,6 @@ class MovieFragment : Fragment() {
             binding.progressBar.isVisible = false
             Constants.movies = movieResponse.data
             binding.movieRecyclerView.adapter = MovieRecyclerAdapter(this, movieResponse.data)
-            if (movieResponse.data?.isNotEmpty() == true) roomRepository?.deleteAllMovies()
             roomRepository?.insertAllMovies(movieResponse.data as List<Movie>?)
         }
 
